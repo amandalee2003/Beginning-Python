@@ -1,0 +1,39 @@
+def printWordList(L):
+    print (", ".join(L))
+
+def AnagramDictionary(f):
+    x = f.read()
+    farray = x.strip().split()
+    dic = {}
+    for array in farray:
+        neword = norm(array)
+        dic.update({neword:[]})
+    for array in farray:
+        neword = norm(array)
+        dic[neword].append(array)
+    return dic
+    
+def norm(s):
+    number = list(s)
+    number.sort()
+    news = "".join(number)
+    return news    
+    
+def main():
+    f = open("scrabble.txt","r")
+    d = AnagramDictionary(f)
+    while True:
+        st = input("\nEnter a string (or nothing to quit): ")
+        print('')
+        if len(st) == 0:
+           print("Bye!\n")
+           break
+        if norm(st) in d:
+            print("The anagrams of "+st+" are:")
+            value = printWordList(d[norm(st)])
+        else:              
+            print("The letters in '"+st+"' do not form a word in the dictionary")
+        f.close()
+               
+if __name__ == "__main__":
+    main()
