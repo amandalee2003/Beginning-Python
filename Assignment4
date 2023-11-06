@@ -1,0 +1,66 @@
+def intro():
+    print()
+    print("Enter a positive integer: ", end="")
+    while True: 
+        stringInput = input()
+        try:
+            global n
+            n = int(stringInput)
+            if n < 1:
+                print("Please enter a positive integer: ", end="")
+            else:
+                return n
+        except ValueError:
+                print("Please enter a positive integer: ", end="")
+                
+def makeSieve(n):
+    global array
+    array = [False]*2 + [True]*(n-1)
+    for x in range(2,n+1):
+        if array[x]:
+            multiple = 2*x
+            while multiple <= n:
+                array[multiple] = False
+                multiple += x
+    return array
+        
+
+def getIndices(L,x):
+    found = []
+    for i in range(0,len(L)):
+        if L[i] == x:
+            found.append(i)
+    return found
+
+
+def main():
+    n = intro()
+    sieve = makeSieve(n)
+    primes = getIndices(sieve,True)
+    composite = getIndices(sieve,False)
+    composite.pop(0)
+    if primes == 0:
+        print('\nThere are', len(primes),"prime numbers in the range 1 to",str(n) +':')
+    else:
+        print('\nThere are', len(primes),"prime numbers in the range 1 to",str(n) +':\n')
+    count = 0
+    for x in primes:
+        print(x,end = " ")
+        count = count + 1
+        if count%10 == 0:
+           print()
+    if n == 1:
+       print('\n'+'There are', len(composite),'composite numbers in the range 1 to',str(n) +':\n')
+    else:
+       print('\n'+'\nThere are', len(composite),'composite numbers in the range 1 to',str(n) +':\n')
+    count = 0
+    for x in composite:
+        print(x,end = ' ')
+        count = count + 1
+        if count%10 == 0:
+           print()
+    print('\n')
+
+
+if __name__ == "__main__":
+   main()
