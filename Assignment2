@@ -1,0 +1,26 @@
+import turtle
+
+n = int(input('Enter an odd integer greater than or equal to 3: '))
+wn = turtle.Screen()      
+wn.bgcolor("white")
+wn.title(str(n)+"-gon")
+
+bob = turtle.Turtle()  
+bob.hideturtle()
+bob.color("blue", "green")  # pen color, fill color
+bob.pensize(2)
+
+angle = 180 - 180 / n
+
+bob.begin_fill()
+
+for i in range(n):
+    bob.forward(150)
+    bob.dot(10,"red")
+    bob.right(angle)
+    bob.forward(150)
+        
+
+bob.end_fill()
+
+wn.mainloop()
