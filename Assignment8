@@ -1,0 +1,45 @@
+import sys
+import os
+
+def main():
+    if len(sys.argv) != 3:
+        print("Usage: Search <string> <file>")
+        quit()
+        
+    word = sys.argv[1]
+    file = sys.argv[2]
+    string_word = str(word)
+    f = open(sys.argv[2])
+    rows = []
+    column = []
+    count = 0
+    
+    for line in f: 
+        search = line.find(string_word)
+        count += 1
+        if search == -1:
+            continue
+        rows.append(count)
+        column.append(search+1)
+        if len(line)-1 > search:
+            word = line.find(string_word,search+1)
+            if word == -1:
+                continue
+            else:
+                rows.append(count)
+            column.append(word+1)
+      
+    print()
+    if len(rows) == 0: 
+        print("'" + str(string_word) + "' not found")  
+    else : 
+        print("'" + str(string_word) + "' found at:")
+        for i in range(0,len(rows)):
+            print("   line " + str(rows[i]) + ", column " + str(column[i]))  
+    print()          
+            
+    
+        
+
+if __name__ == '__main__':
+    main()
