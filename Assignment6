@@ -1,0 +1,57 @@
+import math
+import random
+
+def use_matrix(M):
+    new = list(M)
+    return new
+
+def Det(M):
+    indices = list(range(len(M)))
+    total = 0
+    if len(M) == 1 and len(M[0]) == 1:
+        value = M[0][0]
+        return value
+    if len(M) == 2 and len(M[0]) == 2:
+        value = M[0][0] * M[1][1] - M[1][0] * M[0][1]
+        return value
+ 
+    for x in indices:
+        answer = use_matrix(M) 
+        answer = answer[1:] 
+        height = len(answer) 
+ 
+        for i in range(height):
+            answer[i] = answer[i][0:x] + answer[i][x+1:] 
+ 
+        number = (-1) ** (x % 2)
+        deter = Det(answer)
+        total += number * M[0][x] * deter 
+ 
+    return total
+
+
+def main(seed=None):
+    rng = random.Random(seed)
+    print()
+    print(' n          average of abs(det(M))')
+    print('----------------------------------')
+    
+    for n in range(1,6):
+        count = 0
+        for k in range(1,10001):
+            O = []
+            for i in range(n):
+                P =  []
+                for i in range(n):
+                    sample = rng.uniform(-5,5)
+                    P.append(sample)
+                O.append(P)
+            num = Det(O)
+            count += abs(num)
+        count = count/10000
+        print(' '+ str(n), end = '')
+        print(("{:.5f}".format(count)).rjust(22))
+    print()
+    
+if __name__=="__main__":
+    main()
