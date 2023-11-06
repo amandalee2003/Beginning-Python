@@ -1,0 +1,21 @@
+from math import *
+import sys
+
+A = list()
+
+if len(sys.argv) > 1:
+   A.append(eval("".join(sys.argv[1:])))
+   print(eval("".join(sys.argv[1:])))
+else:
+    i = 0
+    while True:
+        num_input = input("A[{}]:= ".format(i))
+        
+        if num_input == '':
+            print()
+            break
+        
+        A.append(eval(num_input))
+        print(eval(num_input))
+        
+        i += 1
